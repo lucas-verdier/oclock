@@ -8,12 +8,25 @@
 </head>
 <body>
     <main>
-        <div></div>
+        <div>
+        </div>
+        <div class="countdown-container">
+            <div class="hours-c">
+                <p>00</p>
+            </div>
+            <div class="mins-c">
+                <p>00</p>
+            </div>
+            <div class="seconds-c">
+                <p>00</p>
+            </div>
+        </div>
         <button>Minuteur</button>
+
         <form method="POST">
-            <input type="text" name="hours" placeholder="hour">
-            <input type="text" name="minutes" placeholder="min">
-            <input type="text" name="seconds" placeholder="sec">
+            <input type="text" name="hours" value="00" placeholder="hour">
+            <input type="text" name="minutes" value="00" placeholder="min">
+            <input type="text" name="seconds" value="00" placeholder="sec">
             <button>Start</button>
         </form>
         <button>Chronomètre</button>

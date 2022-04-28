@@ -9,3 +9,7 @@ main {
 form:first-of-type {
     display: none;
 }
+
+.countdown-container {
+    display: none
+}

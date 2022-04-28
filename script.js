@@ -40,23 +40,67 @@ document.addEventListener('DOMContentLoaded', function loaded() {
     function timer() {
         var form = document.querySelector('form:first-of-type')
         form.style.display = 'block'
-        var time = '00:00:00'
-        clock.append(time)
-        var date = new Date()
+
+        var fullTime = document.querySelector('.countdown-container')
+        fullTime.style.display = 'flex'
+
+        var timeHour = document.querySelector('.hours-c>p')
+        var timeMin = document.querySelector('.mins-c>p')
+        var timeSeconds = document.querySelector('.seconds-c>p')
 
         var inHour = document.querySelector('form input:first-of-type')
         var inMin = document.querySelector('form input:nth-of-type(2)')
         var inSec = document.querySelector('form input:last-of-type')
+
         var startTimer = document.querySelector('form button')
 
+        inHour.addEventListener('focusout', function() {
+            timeHour.innerHTML = inHour.value
+        })
+        inMin.addEventListener('focusout', function() {
+            timeMin.innerHTML = inMin.value
+        })
+        inSec.addEventListener('focusout', function() {
+            timeSeconds.innerHTML = inSec.value
+        })
         startTimer.addEventListener('click', function(event) {
             event.preventDefault()
-            time = inHour.value + ':' + inMin.value + ':' + inSec.value
-            clock.innerHTML = time
-            // var downSec = inSec.value--
-            // refresh(inSec.value, 1000)
-            // clock.innerHTML = downSec
+            var s = timeSeconds.innerHTML
+            // console.log(timeSeconds.innerHTML - 1)
+            function countDown() {
+                // timeHour.innerHTML = timeHour.innerHTML - 1
+                // timeMin.innerHTML = timeMin.innerHTML - 1
+                //
+                if (timeSeconds.innerHTML > 0) {
+                    timeSeconds.innerHTML = timeSeconds.innerHTML - 1
+                    //
+                    if (timeSeconds.innerHTML < 0) {
+                        timeMin.innerHTML = timeMin.innerHTML -1
+                        timeSeconds.innerHTML = 59
+
+                        // if (timeHour.innerHTML == 0 && timeMin.innerHTML == 0 && timeSeconds.innerHTML == 0) {
+                        //     timeHour.innerHTML = '00'
+                        //     timeMin.innerHTML = '00'
+                        //     timeSeconds.innerHTML = 'OO'
+                        //     console.log('hello')
+                        //     alert('OVER')
+                        // }
+                    }
+                } else {
+                    console.log('over')
+                }
+
+
+
+
+
+            }
+            // refresh(console.log(timeSeconds) - 1, 1000)
+            refresh(countDown, 1000)
+
         })
+
+
     }
 
     minuteur.addEventListener('click', function() {
