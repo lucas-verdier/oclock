@@ -28,6 +28,7 @@
             <input type="text" name="minutes" value="00" placeholder="min">
             <input type="text" name="seconds" value="00" placeholder="sec">
             <button>Start</button>
+            <button>Stop</button>
         </form>
         <button>Chronomètre</button>
         <button>Heure</button>

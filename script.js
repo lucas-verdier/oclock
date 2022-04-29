@@ -30,30 +30,25 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         clock.innerHTML = time
     }
 
-    function refresh(action, time) {
-        var t = time
-        setInterval(action,t)
-    }
-
 
     // FONCTION MINUTEUR
     function timer() {
-        var form = document.querySelector('form:first-of-type')
+        var form        = document.querySelector('form:first-of-type')
         form.style.display = 'block'
 
-        var fullTime = document.querySelector('.countdown-container')
+        var fullTime    = document.querySelector('.countdown-container')
         fullTime.style.display = 'flex'
 
-        var timeHour = document.querySelector('.hours-c>p')
-        var timeMin = document.querySelector('.mins-c>p')
+        var timeHour    = document.querySelector('.hours-c>p')
+        var timeMin     = document.querySelector('.mins-c>p')
         var timeSeconds = document.querySelector('.seconds-c>p')
 
-        var inHour = document.querySelector('form input:first-of-type')
-        var inMin = document.querySelector('form input:nth-of-type(2)')
-        var inSec = document.querySelector('form input:last-of-type')
+        var inHour      = document.querySelector('form input:first-of-type')
+        var inMin       = document.querySelector('form input:nth-of-type(2)')
+        var inSec       = document.querySelector('form input:last-of-type')
 
-        var startTimer = document.querySelector('form button')
-
+        var startTimer  = document.querySelector('form button:first-of-type')
+        var timeId = 0;
         inHour.addEventListener('focusout', function() {
             timeHour.innerHTML = inHour.value
         })
@@ -65,42 +60,24 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         })
         startTimer.addEventListener('click', function(event) {
             event.preventDefault()
-            var s = timeSeconds.innerHTML
-            // console.log(timeSeconds.innerHTML - 1)
             function countDown() {
-                // timeHour.innerHTML = timeHour.innerHTML - 1
-                // timeMin.innerHTML = timeMin.innerHTML - 1
-                //
-                if (timeSeconds.innerHTML > 0) {
-                    timeSeconds.innerHTML = timeSeconds.innerHTML - 1
-                    //
-                    if (timeSeconds.innerHTML < 0) {
-                        timeMin.innerHTML = timeMin.innerHTML -1
-                        timeSeconds.innerHTML = 59
+                timeSeconds.innerHTML--
 
-                        // if (timeHour.innerHTML == 0 && timeMin.innerHTML == 0 && timeSeconds.innerHTML == 0) {
-                        //     timeHour.innerHTML = '00'
-                        //     timeMin.innerHTML = '00'
-                        //     timeSeconds.innerHTML = 'OO'
-                        //     console.log('hello')
-                        //     alert('OVER')
-                        // }
-                    }
-                } else {
-                    console.log('over')
+                if (timeSeconds.innerHTML < 0) {
+                    timeMin.innerHTML--
+                    timeSeconds.innerHTML = 59
+                }
+                if (timeMin.innerHTML < 0) {
+                    timeHour.innerHTML--
+                    timeMin.innerHTML =59
+                }
+                if (timeHour.innerHTML == 0 && timeMin.innerHTML == 0 && timeSeconds.innerHTML == 0) {
+                    clearInterval(timeId)
                 }
 
-
-
-
-
             }
-            // refresh(console.log(timeSeconds) - 1, 1000)
-            refresh(countDown, 1000)
-
+            timeId =   setInterval(countDown, 1000)
         })
-
-
     }
 
     minuteur.addEventListener('click', function() {
@@ -109,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function loaded() {
     })
 
     horloge.addEventListener('click', function() {
-        refresh(showDate, 300)
+        setInterval(showDate, 300)
     })
 
 
