@@ -13,3 +13,14 @@ form:first-of-type {
 .countdown-container {
     display: none
 }
+
+#chrono-container {
+    display: none;
+}
+
+#alarm-container {
+    display: none;
+}
+#alarm-container form {
+    display: none;
+}
