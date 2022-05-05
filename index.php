@@ -5,22 +5,28 @@
     <title>Snooze</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
-        <div>
+        <div id="dateTime">
         </div>
 
         <!--    MINUTEUR    -->
         <div class="countdown-container">
             <div class="hours-c">
                 <p>00</p>
+                <p>Heures</p>
             </div>
             <div class="mins-c">
                 <p>00</p>
+                <p>Minutes</p>
             </div>
             <div class="seconds-c">
                 <p>00</p>
+                <p>Secondes</p>
             </div>
         </div>
         <form method="POST">
@@ -65,10 +71,14 @@
                 <div class="mins-a">
                     <p></p>
                 </div>
+                <div class="secs-a">
+                    <p></p>
+                </div>
             </div>
             <form method="POST">
                 <input type="number" name="alarmHours" value="00">
                 <input type="number" name="alarmMins" value="00">
+                <input type="number" name="alarmSecs" value="00">
             </form>
             <div class="alarm-controls">
                 <button>Enregistrer</button>

@@ -1,7 +1,7 @@
 'use strict'
 
 document.addEventListener('DOMContentLoaded', function loaded() {
-    var clock       = document.querySelector('main>div')
+    var clock       = document.querySelector('#dateTime')
     var minuteur    = document.querySelector('#controls button:first-of-type')
     var chronometre = document.querySelector('#controls button:nth-of-type(2)')
     var horloge     = document.querySelector('#controls button:nth-of-type(3)')
@@ -12,34 +12,37 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         var date = new Date()
 
         var time
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var s = date.getSeconds();
+        var h = date.getHours()
+        h = h.toString()
+        h = h.padSttoutart(2, '0')
 
-        if (h < 10) {
-            h = '0' + h
-        }
-        if (m < 10) {
-            m = '0' + m
-        }
-        if (s < 10) {
-            s = '0' + s
-        }
+        var m = date.getMinutes()
+        m = m.toString()
+        m = m.padStart(2, '0')
+
+        var s = date.getSeconds()
+        s = s.toString()
+        s = s.padStart(2, '0')
+
         time = h + ':' + m + ':' + s
         clock.innerHTML = time
+        clock.style.display = 'block'
     }
 
 
     // FONCTION MINUTEUR
     function timer() {
         var form        = document.querySelector('form:first-of-type')
-        form.style.display = 'block'
+        form.style.display = 'flex'
 
         var fullTime    = document.querySelector('.countdown-container')
         fullTime.style.display = 'flex'
 
         var timeHour    = document.querySelector('.hours-c>p')
         var timeMin     = document.querySelector('.mins-c>p')
+        timeMin.innerHTML = timeMin.innerHTML.toString()
+        timeMin.innerHTML = timeMin.innerHTML.padStart(2, '0')
+
         var timeSeconds = document.querySelector('.seconds-c>p')
 
         var inHour      = document.querySelector('form input:first-of-type')
@@ -143,65 +146,92 @@ document.addEventListener('DOMContentLoaded', function loaded() {
     }
 
     // FONCTION ALARME
-
     function alarm() {
         var alarmContainer = document.querySelector('#alarm-container')
-        alarmContainer.style.display = 'block'
+        alarmContainer.style.display = 'flex'
         var formAlarm      = document.querySelector('#alarm-container form')
         formAlarm.style.display = 'block'
 
         var hour = document.querySelector('.hours-a>p')
         var min  = document.querySelector('mins-a>p')
+        var sec  = document.querySelector('secs-a>p')
         var interval
 
         var inputHour = document.querySelector('#alarm-container form input:first-of-type')
-        var inputMin  = document.querySelector('#alarm-container form input:last-of-type')
-        console.log(inputMin.value)
+        // inputHour = inputHour.toString()
+        // inputHour = inputHour.padStart(2,'0')
+
+        var inputMin  = document.querySelector('#alarm-container form input:nth-of-type(2)')
+        // inputMin = inputMin.toString()
+        // inputMin = inputMin.padStart(2,'0')
+
+        var inputSec  = document.querySelector('#alarm-container form input:nth-of-type(3)')
+        // inputSec = inputSec.toString()
+        // inputSec = inputSec.padStart(2,'0')
 
         var setAlarm   = document.querySelector('.alarm-controls button:first-of-type')
         var unsetAlarm = document.querySelector('.alarm-controls button:last-of-type')
         inputHour.addEventListener('focusout', function() {
             hour  = inputHour.value
-            // console.log(hour)
-
         })
         inputMin.addEventListener('focusout', function() {
             min =  inputMin.value
-            // console.log(min)
         })
-
+        inputSec.addEventListener('focusout', function() {
+            sec = inputSec.value
+        })
+        sec = inputSec.value
+        min =  inputMin.value
+        hour  = inputHour.value
         var array = []
         setAlarm.addEventListener('click', function(event) {
             event.preventDefault()
 
-            // var ul = document.querySelector('#alarms')
             var li = document.createElement('li')
-            var deleteAlarm = document.createElement('button')
-            var p = document.createElement('p')
-            li.innerHTML = hour + ' : ' + min
-            deleteAlarm.innerHTML = 'Supprimer'
-            p.innerHTML = hour - DateHour
+            // var p = document.createElement('p')
+            li.innerHTML = hour + ':' + min + ':' + sec
+            // p.innerHTML = displayText
             document.getElementById('alarms').appendChild(li)
-            document.getElementById('alarms').appendChild(deleteAlarm)
-            document.getElementById('alarms').appendChild(p)
+            // document.getElementById('alarms').appendChild(p)
             array.push(li)
 
             function currentTime() {
                 var date = new Date()
+
                 var dateHour = date.getHours()
-                // console.log(dateHour)
+                dateHour = dateHour.toString()
+                dateHour = dateHour.padStart(2, '0')
+
                 var dateMin  = date.getMinutes()
-                // console.log(dateMin)
-                if (hour == dateHour && min == dateMin) {
-                    alert('Wake up')
-                    clearInterval(interval)
-                }
+                dateMin = dateMin.toString()
+                dateMin = dateMin.padStart(2, '0')
+
+                var dateSec = date.getSeconds()
+                dateSec = dateSec.toString()
+                dateSec = dateSec.padStart(2, '0')
+
+                var time = dateHour + ':' + dateMin + ':' + dateSec
+
+                var audio = new Audio('dong.mp3')
+                array.forEach((element) => {
+                    console.log(element.innerHTML)
+                    if (element.innerHTML == time) {
+                        audio.play()
+                        alert('time out')
+                        element.remove()
+                        clearInterval(interval)
+                        audio.pause()
+                    }
+                })
             }
-            console.log(array)
             interval = setInterval(currentTime, 1000)
         })
 
-
+        unsetAlarm.addEventListener('click', function() {
+            document.querySelector('#alarms').remove()
+            array = []
+            clearInterval(interval)
+        })
     }
 
     minuteur.addEventListener('click', function() {
@@ -220,7 +250,4 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         setInterval(showDate, 300)
         alarm()
     })
-
-
-
 })

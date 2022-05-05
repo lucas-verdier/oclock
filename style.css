@@ -1,26 +1,171 @@
 body {
     min-height: 100vh;
+    background: url('background1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
 }
 
 main {
     min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+/* HOUR */
+#dateTime {
+    display: none;
+    position: absolute;
+    margin-top: 300px;
+    width: 20%;
+    text-align: center;
+    font-size: 4em;
+    background-color: rgba(240, 255, 255, 0.11);
+    padding: 1%;
+    font-weight: 400;
+    letter-spacing: 5px;
+}
+
+
+
+/* MINUTEUR */
+.countdown-container {
+    display: none;
+    margin-top: 400px;
+    width: 30%;
+    margin-bottom: 50px;
+    display: none;
+    justify-content: space-around;
 }
 
 form:first-of-type {
     display: none;
 }
-
-.countdown-container {
-    display: none
+.countdown-container div {
+    background-color: rgba(28, 28, 28, 0.21);
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 25%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.countdown-container div p:first-of-type {
+    font-size: 2.7em;
+    color: white;
+    font-weight: 600;
+    height: 80%;
+}
+.countdown-container div p:last-of-type {
+    height: 20%;
+    color: white;
+    font-weight: 500;
 }
 
+
+
+
+/* CHRONOMETRE */
 #chrono-container {
     display: none;
 }
 
+
+
+/* ALARM */
 #alarm-container {
     display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 500px;
 }
 #alarm-container form {
     display: none;
+}
+#alarm-container form input {
+    border-style: none;
+    text-align: center;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1.5em;
+    width: 150px;
+    background-color: rgba(255, 255, 255, 0.47);
+}
+#alarm-container form input:hover {
+    background-color: white;
+}
+
+.alarm-controls {
+    margin-top: 20px;
+    width: 400px;
+    display: flex;
+    justify-content: space-around;
+}
+.alarm-controls button {
+    border-style: none;
+    background-color: #f7c100;
+    font-family: 'Poppins', sans-serif;
+    width: 40%;
+    height: 50px;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+.alarm-controls button:hover {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+#alarms {
+    width: 360px;
+    list-style: none;
+    padding-left: 0;
+}
+#alarms li {
+    background-color: white;
+    margin-left: 0;
+    padding-left: 10px;
+    border-bottom: 2px solid #318ce7;
+    transition: all 0.2s ease-in-out;
+    border-radius: 0 0 4px 4px;
+}
+#alarms li:hover {
+    background-color: #318ce7;
+    color: white;
+}
+
+
+
+
+/* CONTROLS */
+#controls {
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    height: 5%;
+    position: absolute;
+    margin-top: 80vh;
+}
+#controls button {
+    margin-left: 10px;
+    margin-right: 10px;
+    border-style: none;
+    width: 20%;
+    background-color: rgba(255, 255, 255, 0.22);
+    font-size: 1.2em;
+    transition: all 0.2s ease-in-out;
+}
+#controls button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: white;
 }
