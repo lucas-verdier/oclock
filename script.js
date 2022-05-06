@@ -7,14 +7,29 @@ document.addEventListener('DOMContentLoaded', function loaded() {
     var horloge     = document.querySelector('#controls button:nth-of-type(3)')
     var reveil      = document.querySelector('#controls button:last-of-type')
 
+    var body            = document.querySelector('body')
+    var form            = document.querySelector('form:first-of-type')
+    var fullTime        = document.querySelector('.countdown-container')
+    var chronoContainer = document.querySelector('#chrono-container')
+    var alarmContainer  = document.querySelector('#alarm-container')
+    var formAlarm       = document.querySelector('#alarm-container form')
+
+
     // AFFICHER L HEURE
+    function displayDate() {
+        setInterval(showDate, 300)
+    }
     function showDate() {
+        // form.style.display = 'none'
+        // fullTime.style.display = 'none'
+        // chronoContainer.style.display = 'none'
+
         var date = new Date()
 
         var time
         var h = date.getHours()
         h = h.toString()
-        h = h.padSttoutart(2, '0')
+        h = h.padStart(2, '0')
 
         var m = date.getMinutes()
         m = m.toString()
@@ -29,17 +44,17 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         clock.style.display = 'block'
     }
 
-
     // FONCTION MINUTEUR
     function timer() {
-        var form        = document.querySelector('form:first-of-type')
         form.style.display = 'flex'
-
-        var fullTime    = document.querySelector('.countdown-container')
         fullTime.style.display = 'flex'
+        // clock.style.display = 'none'
+        chronoContainer.style.display = 'none'
+        alarmContainer.style.display = 'none'
+        formAlarm.style.display = 'none'
 
-        var timeHour    = document.querySelector('.hours-c>p')
-        var timeMin     = document.querySelector('.mins-c>p')
+        var timeHour      = document.querySelector('.hours-c>p')
+        var timeMin       = document.querySelector('.mins-c>p')
         timeMin.innerHTML = timeMin.innerHTML.toString()
         timeMin.innerHTML = timeMin.innerHTML.padStart(2, '0')
 
@@ -90,8 +105,12 @@ document.addEventListener('DOMContentLoaded', function loaded() {
 
     // FONCTION CHRONOMETRE
     function stopWatch() {
-        var chronoContainer = document.querySelector('#chrono-container')
-        chronoContainer.style.display = 'block'
+        chronoContainer.style.display = 'flex'
+        // clock.style.display = 'none'
+        form.style.display = 'none'
+        fullTime.style.display = 'none'
+        alarmContainer.style.display = 'none'
+        formAlarm.style.display = 'none'
 
         var hour = document.querySelector('.hours-s>p')
         var min  = document.querySelector('.mins-s>p')
@@ -147,10 +166,14 @@ document.addEventListener('DOMContentLoaded', function loaded() {
 
     // FONCTION ALARME
     function alarm() {
-        var alarmContainer = document.querySelector('#alarm-container')
+
+        setInterval(showDate, 300)
+
         alarmContainer.style.display = 'flex'
-        var formAlarm      = document.querySelector('#alarm-container form')
         formAlarm.style.display = 'block'
+        chronoContainer.style.display = 'none'
+        form.style.display = 'none'
+        fullTime.style.display = 'none'
 
         var hour = document.querySelector('.hours-a>p')
         var min  = document.querySelector('mins-a>p')
@@ -188,11 +211,8 @@ document.addEventListener('DOMContentLoaded', function loaded() {
             event.preventDefault()
 
             var li = document.createElement('li')
-            // var p = document.createElement('p')
             li.innerHTML = hour + ':' + min + ':' + sec
-            // p.innerHTML = displayText
             document.getElementById('alarms').appendChild(li)
-            // document.getElementById('alarms').appendChild(p)
             array.push(li)
 
             function currentTime() {
@@ -234,20 +254,11 @@ document.addEventListener('DOMContentLoaded', function loaded() {
         })
     }
 
-    minuteur.addEventListener('click', function() {
-        timer()
-    })
+    minuteur.addEventListener('click', timer)
 
-    horloge.addEventListener('click', function() {
-        setInterval(showDate, 300)
-    })
+    horloge.addEventListener('click', displayDate)
 
-    chronometre.addEventListener('click', function() {
-        stopWatch()
-    })
+    chronometre.addEventListener('click', stopWatch)
 
-    reveil.addEventListener('click', function() {
-        setInterval(showDate, 300)
-        alarm()
-    })
+    reveil.addEventListener('click', alarm)
 })
